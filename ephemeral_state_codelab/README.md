@@ -1,16 +1,70 @@
-# ephemeral_state_codelab
+# Ephemeral State Management Example
 
-A new Flutter project.
+This Flutter project demonstrates **ephemeral state management** using `StatefulWidget` and `setState()`. The counter state is contained within a single widget and doesn't persist across navigation or widget rebuilds.
 
-## Getting Started
+## Key Features
 
-This project is a starting point for a Flutter application.
+- ✅ Simple counter implementation using local state
+- ✅ State managed within `_CounterWidgetState`
+- ✅ Direct UI updates using `setState()`
+- ✅ No external dependencies required
+- ✅ Minimal boilerplate code
 
-A few resources to get you started if this is your first Flutter project:
+## Implementation Details
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### State Management
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```dart
+class _CounterWidgetState extends State<CounterWidget> {
+  int _counter = 0; // Local ephemeral state
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Text('Counter Value: $_counter'),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                _counter++; // Triggers widget rebuild
+              });
+            },
+            child: Text('Increment'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### Characteristics
+
+- **Scope**: Limited to the `CounterWidget` only
+- **Persistence**: State is lost when widget is disposed
+- **Sharing**: Cannot be accessed by other widgets
+- **Performance**: Direct, efficient updates
+- **Complexity**: Simple and easy to understand
+
+## When to Use Ephemeral State
+
+This pattern is ideal for:
+
+- Form field values and validation states
+- Animation controllers and progress
+- Currently selected tabs or menu items
+- Scroll positions and view states
+- Any UI state that doesn't need to be shared
+
+## Running the Project
+
+```bash
+cd ephemeral_state_codelab
+flutter pub get
+flutter run
+```
+
+## Comparison
+
+Compare this implementation with the `app_state_codelab` project to understand the differences between ephemeral and app state management approaches. See the main project README for a detailed comparison.
